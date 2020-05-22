@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <ul id="myUl"><li id="item1">List Item1 </li><li>List Item2 </li><li>List Item3 </li><li>List Item4 </li><li>List Item5 </li><li>List Item6 </li></ul>
+    <input type="button" value="Choose first element" onclick="firstElement()"/><br>
+    <input type="button" value="Choose last element" onclick="lastElement()"/><br>
+    <input type="button" value="Choose next element" onclick="nextElement()"/><br>
+    <input type="button" value="Choose previous element" onclick="previousElement()"/><br>
+    <input type="button" value="Add element" onclick="addElement()"/><br>
+    <input type="button" value="Remove element" onclick="removeElement()"/><br>
+    <input type="button" value="Add to the beginning" onclick="beginingAdd()"/>  
+    <script>
+        function firstElement() {
+            var newUl = document.getElementById("myUl");
+            newUl.firstChild.style.color = 'red'; 
+        };
+        function lastElement() {
+            var newUl = document.getElementById("myUl");
+            newUl.lastChild.style.color = 'red'; 
+        };
+        var node = null;
+
+        function nextElement() {
+
+            setColor();
+            if (node == null) {
+                var newUl = document.getElementById('myUl');
+                node = newUl.firstChild.nextSibling;
+                node.style.color = 'red';
+                return;
+            }
+            node = node.nextElementSibling;
+            if (node != null) {
+                node.style.color = 'red';
+
+            }
+        }
+
+        function setColor() {
+            var newItem = document.getElementsByTagName("LI");
+
+            for (let i = 0; i < newItem.length; i++) {
+                newItem[i].style.color = "black";
+            }
+        };  
+        function previousElement() {
+        setColor();
+        if (node == null) {
+            var newUl = document.getElementById('myUl');
+            node = newUl.lastChild.previousSibling;
+            node.style.color = 'red';
+            return;
+        }
+        node = node.previousElementSibling;
+        if (node != null) {
+            node.style.color = 'red';
+        }
+        };
+        function addElement() {
+            var newItem = document.createElement("li");
+            newItem.innerHTML = "<li>" + "List Item " + document.getElementById("myUl").childNodes.length  + "</li>";
+            document.getElementById("myUl").appendChild(newItem);
+        };
+        function removeElement() {
+            var lastChild = document.getElementById("myUl").lastChild;
+            document.getElementById("myUl").removeChild(lastChild);
+        };
+        function beginingAdd() {
+            var firstChild = document.getElementById("myUl").firstChild;
+            var newItem = document.createElement("li");
+            newItem.innerHTML = "<li>" + "List Item " + "</li>";
+            document.getElementById("myUl").insertBefore(newItem,firstChild);
+        }
+    </script> 
+</body>
+</html>
